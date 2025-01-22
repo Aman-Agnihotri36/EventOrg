@@ -2,7 +2,9 @@ import mongoose from 'mongoose'
 
 const MONGODB_URI = process.env.MONGODB_URI
 
+/* eslint-disable prefer-const, @typescript-eslint/no-explicit-any */
 const cached = (global as any).mongoose || { conn: null, promise: null }
+/* eslint-disable prefer-const, @typescript-eslint/no-explicit-any */
 
 export const connectToDatabase = async () => {
     if (cached.conn) return cached.conn

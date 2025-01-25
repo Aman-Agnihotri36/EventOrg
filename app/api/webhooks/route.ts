@@ -52,5 +52,9 @@ export async function POST(req: Request) {
     console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
     console.log('Webhook payload:', body)
 
-    return new Response('Webhook received', { status: 200 })
+    if (eventType === 'user.created') {
+        console.log('User Created')
+    }
+
+    return new Response('', { status: 200 })
 }

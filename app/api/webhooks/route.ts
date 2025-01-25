@@ -1,8 +1,6 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
-import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
-import { NextResponse } from 'next/server'
+import { WebhookEvent } from '@clerk/nextjs/server'
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -49,59 +47,10 @@ export async function POST(req: Request) {
 
     // Do something with payload
     // For this guide, log payload to console
-
+    const { id } = evt.data
     const eventType = evt.type
-
-    if (eventType === 'user.created') {
-        const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
-
-        const user = {
-            clerkId: id,
-            email: email_addresses[0].email_address,
-            username: username!,
-            firstName: first_name!,
-            lastName: last_name!,
-            photo: image_url
-        }
-
-        console.log('YI9U', user)
-
-        const newUser = await createUser(user)
-
-        if (newUser) {
-            await (await clerkClient()).users.updateUserMetadata(id, {
-                publicMetadata: {
-                    userId: newUser._id
-                }
-            })
-        }
-
-        console.log('YOUR USER', newUser)
-
-        return NextResponse.json({ message: 'OK', user: newUser })
-
-    }
-    if (eventType === 'user.updated') {
-        console.log('SUCCESSFULLY USER UPDATED')
-
-        return NextResponse.json({ message: 'OK' })
-
-    }
-    if (eventType === 'user.deleted') {
-        const { id } = evt.data
-
-
-
-        const deletedUser = await deleteUser(id || '')
-
-
-
-        return NextResponse.json({ message: 'OK', user: deletedUser })
-
-    }
-
+    console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+    console.log('Webhook payload:', body)
 
     return new Response('Webhook received', { status: 200 })
 }
-
-// Webhooks are used to enable real-time communication between two systems by automatically sending data from one system to another when a specific event occurs. They are widely used in modern applications for seamless integration and automation of workflows.

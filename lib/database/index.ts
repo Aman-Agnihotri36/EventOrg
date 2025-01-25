@@ -1,22 +1,31 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI
+let initialized = false;
+const Mongouri = process.env.MONGODB_URI
 
-/* eslint-disable prefer-const, @typescript-eslint/no-explicit-any */
-const cached = (global as any).mongoose || { conn: null, promise: null }
-/* eslint-disable prefer-const, @typescript-eslint/no-explicit-any */
+if (!Mongouri) {
+    throw new Error('MongoDB URI is not defined in the environment variables.');
+}
 
-export const connectToDatabase = async () => {
-    if (cached.conn) return cached.conn
 
-    if (!MONGODB_URI) throw new Error('MONGODB_URI is missing')
 
-    cached.promise = cached.promise || mongoose.connect(MONGODB_URI, {
-        dbName: 'evently',
-        bufferCommands: false
-    })
+export const connect = async () => {
+    mongoose.set('strictQuery', true)
 
-    cached.conn = await cached.promise
+    if (initialized) {
+        console.log('MongoDB already connected')
+        return
+    }
 
-    return cached.conn
+    try {
+        await mongoose.connect(Mongouri, {
+            dbName: 'next auth app',
+
+        })
+
+        console.log('Mongo db Connected')
+        initialized = true
+    } catch (error) {
+        console.log('MongoDb connection errro', error)
+    }
 }

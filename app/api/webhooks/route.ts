@@ -1,6 +1,8 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { createUser } from '@/lib/actions/user.actions'
+import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -53,7 +55,31 @@ export async function POST(req: Request) {
     console.log('Webhook payload:', body)
 
     if (eventType === 'user.created') {
-        console.log('User Created')
+        const { id, first_name, last_name, image_url, email_addresses, username } = evt?.data
+
+        try {
+
+            const user = {
+                clerkId: id,
+                email: email_addresses[0].email_address,
+                username: username!,
+                firstName: first_name!,
+                lastName: last_name!,
+                photo: image_url
+            }
+
+            const newUser = await createUser(user)
+
+            if (newUser) {
+                return NextResponse.json({ message: 'USER CREATED', item: newUser }, { status: 200 })
+            }
+            if (!newUser) {
+                return NextResponse.json({ message: 'USER NOT CREATED', }, { status: 400 })
+            }
+
+        } catch (error) {
+
+        }
     }
 
     return new Response('', { status: 200 })

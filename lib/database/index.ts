@@ -19,7 +19,7 @@ export const connect = async () => {
 
     try {
         await mongoose.connect(Mongouri, {
-            dbName: 'next auth app',
+            dbName: 'Evently',
 
         })
 

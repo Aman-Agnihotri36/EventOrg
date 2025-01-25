@@ -78,7 +78,7 @@ export async function POST(req: Request) {
             }
 
         } catch (error) {
-
+            console.log('FACING ISSUE WHILE CREATING USER', error)
         }
     }
 

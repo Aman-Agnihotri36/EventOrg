@@ -82,21 +82,9 @@ export async function POST(req: Request) {
 
     }
     if (eventType === 'user.updated') {
-        const { id, image_url, first_name, last_name, username } = evt.data
+        console.log('SUCCESSFULLY USER UPDATED')
 
-        const user = {
-
-            username: username!,
-            firstName: first_name!,
-            lastName: last_name!,
-            photo: image_url
-        }
-
-        const updatedUser = await updateUser(id, user)
-
-
-
-        return NextResponse.json({ message: 'OK', user: updatedUser })
+        return NextResponse.json({ message: 'OK' })
 
     }
     if (eventType === 'user.deleted') {

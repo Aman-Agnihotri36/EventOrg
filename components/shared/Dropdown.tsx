@@ -44,12 +44,15 @@ function Dropdown({ onChangeHandler }: DropdownProps) {
         const getCategories = async () => {
             const categoryList = await getAllCategories()
 
-            categoryList && setCategories(categoryList)
+            if (categoryList) {
+                setCategories(categoryList)
+            }
         }
 
         getCategories()
 
     }, [])
+
 
     return (
         <Select onValueChange={onChangeHandler}>

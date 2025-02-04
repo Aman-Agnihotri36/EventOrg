@@ -5,7 +5,7 @@ import { SearchParamProps } from '@/types'
 
 import { getOrderByEvent } from '@/lib/actions/order.actions'
 import { getEventById } from '@/lib/actions/event.actions'
-import { IOrder, IOrderItem } from '@/lib/database/models/order.model'
+import { IOrderItem } from '@/lib/database/models/order.model'
 
 
 const Orders = async ({ searchParams }: SearchParamProps) => {

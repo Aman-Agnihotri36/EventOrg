@@ -2,14 +2,14 @@
 
 import mongoose from "mongoose";
 
-import Order from "../database/models/order.model";
+import Order, { IOrder, IOrderItem } from "../database/models/order.model";
 import { handleError } from "../utils";
 import { MongoDbConnect } from "../database";
 
 
 
 
-const populateOrder = async (orders: any[]) => {
+const populateOrder = async (orders: IOrderItem[]) => {
     return await Promise.all(
         orders.map(order =>
             Order.findById(order._id)
@@ -23,8 +23,8 @@ const populateOrder = async (orders: any[]) => {
 type OrderDetails = {
     buyerId: string;
     eventId: string;
-    razorPayId: any;
-    money: any;
+    razorPayId: string;
+    money: string;
     createdAt: Date;
 
 }

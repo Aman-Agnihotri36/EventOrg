@@ -7,7 +7,7 @@ import Link from 'next/link';
 import CheckOut from './CheckOut';
 import { useEffect, useState } from 'react';
 import { getClerkUser } from '@/lib/actions/user.actions';
-import { IUser } from '@/lib/database/models/user.model';
+
 
 
 

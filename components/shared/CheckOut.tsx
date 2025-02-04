@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 
 import Script from 'next/script'
 import { CreateOrder } from '@/lib/actions/order.actions';
+import { RazorpayOptions } from '@/types';
 
 
 declare global {
     interface Window {
-        Razorpay: (options: any) => {
+        Razorpay: (options: RazorpayOptions) => {
             open: () => void;
             close: () => void;
             on: (event: string, callback: () => void) => void;

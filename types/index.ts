@@ -14,6 +14,16 @@ export type UpdateUserParams = {
     photo: string
 }
 
+export type RazorpayOptions = {
+    key: string;
+    amount: number;
+    currency: string;
+    name: string;
+    description: string;
+    // Add more properties as per Razorpay's API
+};
+
+
 // ====== EVENT PARAMS
 export type CreateEventParams = {
 

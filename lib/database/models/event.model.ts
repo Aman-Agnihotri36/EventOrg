@@ -8,6 +8,7 @@ export interface IEvent extends Document {
     location?: string;
     createdAt: Date;
     imageUrl: string;
+    startDateTime: Date;
     endDateTime: Date;
     price?: string;
     isFree: boolean;
@@ -23,6 +24,7 @@ const EventSchema = new Schema({
     location: { type: String },
     createdAt: { type: Date, default: Date.now() },
     imageUrl: { type: String, required: true },
+    startDateTime: { type: Date, default: Date.now() },
     endDateTime: { type: Date, default: Date.now() },
     price: { type: String },
     isFree: { type: Boolean, default: false },
@@ -32,5 +34,6 @@ const EventSchema = new Schema({
 })
 
 
-const Event = models.User || model('User', EventSchema)
+
+const Event = models.Event || model('Event', EventSchema);
 export default Event

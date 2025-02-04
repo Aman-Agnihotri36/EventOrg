@@ -3,14 +3,16 @@ import mongoose from "mongoose";
 let initialized = false;
 const Mongouri = process.env.MONGODB_URI
 
+console.log('SOUJ', Mongouri)
+
 if (!Mongouri) {
     throw new Error('MongoDB URI is not defined in the environment variables.');
 }
 
 
 
-export const connect = async () => {
-    mongoose.set('strictQuery', true)
+export const MongoDbConnect = async () => {
+
 
     if (initialized) {
         console.log('MongoDB already connected')

@@ -2,16 +2,23 @@
 
 import { CreateUserParams, UpdateUserParams } from "@/types"
 import { handleError } from "../utils"
-import { connect } from "../database"
+import { MongoDbConnect } from "../database"
 import User from "../database/models/user.model"
 import Event from "../database/models/event.model"
 import { revalidatePath } from "next/cache"
 
 
+
+
+
 export const createUser = async (user: CreateUserParams) => {
+
     try {
-        await connect()
+        await MongoDbConnect()
         const newUser = await User.create(user)
+
+
+
 
         return JSON.parse(JSON.stringify(newUser))
     } catch (error) {
@@ -21,7 +28,7 @@ export const createUser = async (user: CreateUserParams) => {
 
 export async function updateUser(clerkId: string, user: UpdateUserParams) {
     try {
-        await connect()
+        await MongoDbConnect()
 
         const updatedUser = await User.findOneAndUpdate({ clerkId }, user, { new: true })
 
@@ -34,7 +41,7 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
 
 export async function deleteUser(clerkId: string) {
     try {
-        await connect()
+        await MongoDbConnect()
 
         // Find user to delete
         const userToDelete = await User.findOne({ clerkId })
@@ -64,3 +71,17 @@ export async function deleteUser(clerkId: string) {
         handleError(error)
     }
 }
+
+export const getClerkUser = async (userId: string | null) => {
+
+    await MongoDbConnect()
+
+    const LoginUser = await User.findOne({ clerkId: userId }).select('_id');
+
+
+    return LoginUser?._id.toString();
+
+
+}
+
+

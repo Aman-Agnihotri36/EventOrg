@@ -3,12 +3,21 @@ import Collection from '@/components/shared/Collection'
 import { getEventById, getPurchasedEventsByUser, getRelatedEventsByCategory } from '@/lib/actions/event.actions'
 import { getClerkUser } from '@/lib/actions/user.actions'
 import { formatDateTime } from '@/lib/utils'
-import { SearchParamProps } from '@/types'
+
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React from 'react'
 
+interface SearchParamProps {
+    params: {
+        id: string;
+    };
+    searchParams: {
+        page?: string;
+    };
+}
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 async function EventDetails({ params: { id }, searchParams }: SearchParamProps) {
 
 

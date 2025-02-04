@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { CreateEventParams, DeleteEventParams, GetAllEventsParams, GetEventsByUserParams, GetRelatedEventsByCategoryParams, UpdateEventParams } from '../../types'
 
 import Category from '../database/models/category.model'
-import Event from '../database/models/event.model'
+import Event, { IEvent } from '../database/models/event.model'
 import User from '../database/models/user.model'
 import { handleError } from '../utils'
 
@@ -27,7 +27,7 @@ const populateEvent = async (query: any) => {
 
 
 
-export const createEvent = async ({ event, userId }: CreateEventParams) => {
+export const createEvent = async ({ event, userId }: { event: any, userId: string }) => {
     try {
         await MongoDbConnect()
 
@@ -39,7 +39,7 @@ export const createEvent = async ({ event, userId }: CreateEventParams) => {
             throw new Error('Organizer not found')
         }
 
-        const newEvent = await Event.create({ ...event, category: event.categoryId, organizer: organizer._id })
+        const newEvent = await Event.create({ ...event, category: event.category._id, organizer: organizer._id })
 
         return JSON.parse(JSON.stringify(newEvent))
     } catch (error) {
@@ -106,7 +106,7 @@ export async function deleteEvent({ eventId, path }: DeleteEventParams) {
     }
 }
 
-export async function updateEvent({ userId, event, path }: UpdateEventParams) {
+export async function updateEvent({ userId, event, path }: any) {
     try {
         await MongoDbConnect()
 

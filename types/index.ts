@@ -16,20 +16,20 @@ export type UpdateUserParams = {
 
 // ====== EVENT PARAMS
 export type CreateEventParams = {
-    userId: string
+
     event: {
-        title: string
-        description: string
-        location: string
-        imageUrl: string
-        startDateTime: Date
-        endDateTime: Date
-        categoryId: string
-        price: string
-        isFree: boolean
-        url: string
-    }
-    path: string
+        title: string;
+        description?: string;
+        location?: string;
+        imageUrl: string;
+        startDateTime: Date;
+        endDateTime: Date;
+        price?: string;
+        isFree: boolean;
+        url?: string;
+        categoryId?: string;
+    };
+
 }
 
 export type UpdateEventParams = {

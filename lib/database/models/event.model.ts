@@ -2,7 +2,7 @@ import { model, Document, models, Schema } from "mongoose";
 
 
 export interface IEvent extends Document {
-    _id: string
+    _id: string;
     title: string;
     description?: string;
     location?: string;
@@ -13,8 +13,8 @@ export interface IEvent extends Document {
     price?: string;
     isFree: boolean;
     url?: string;
-    category?: { _id: string, name: string };
-    organizer?: { _id: string, firstName: string, lastName: string };
+    category?: { _id: string; name: string };
+    organizer?: { _id: string; firstName: string; lastName: string };
 }
 
 

@@ -21,14 +21,12 @@ import {
 import { Input } from "../ui/input"
 import { createCategory, getAllCategories } from "@/lib/actions/category.actions"
 
-
-
 type DropdownProps = {
     value?: string,
     onChangeHandler?: () => void
 }
 
-function Dropdown({ value, onChangeHandler }: DropdownProps) {
+function Dropdown({ onChangeHandler }: DropdownProps) {
 
     const [categories, setCategories] = useState<ICategory[]>([])
     const [newCategory, setNewCategory] = useState('')
@@ -52,6 +50,7 @@ function Dropdown({ value, onChangeHandler }: DropdownProps) {
         getCategories()
 
     }, [])
+
     return (
         <Select onValueChange={onChangeHandler}>
             <SelectTrigger className="select-field">
@@ -73,14 +72,13 @@ function Dropdown({ value, onChangeHandler }: DropdownProps) {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                             <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => startTransition(handleAddCategory)}>Add</AlertDialogAction>
+                            <AlertDialogAction onClick={() => startTransition(() => handleAddCategory())}>Add</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
 
             </SelectContent>
         </Select>
-
     )
 }
 

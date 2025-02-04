@@ -25,23 +25,15 @@ const populateEvent = async (query: any) => {
         .populate({ path: 'category', model: Category, select: '_id name' })
 }
 
-const populateEventTwo = async (events: any[]) => {
-    return await Promise.all(
-        events.map(event =>
-            Event.findById(event._id)
-                .populate({ path: 'organizer', select: '_id firstName lastName email' })
-                .populate({ path: 'category', select: '_id name' })
-        )
-    );
-};
 
-export const createEvent = async ({ event, userId, path }: CreateEventParams) => {
+
+export const createEvent = async ({ event, userId }: CreateEventParams) => {
     try {
         await MongoDbConnect()
-        console.log('USER ID', userId)
+
 
         const organizer = await User.findOne({ clerkId: userId }).select('_id');
-        console.log('Organizers', organizer)
+
 
         if (!organizer) {
             throw new Error('Organizer not found')
@@ -119,10 +111,10 @@ export async function updateEvent({ userId, event, path }: UpdateEventParams) {
         await MongoDbConnect()
 
         userId = await getClerkUser(userId)
-        console.log('YOUR UERID', userId)
+
 
         const eventToUpdate = await Event.findById(event._id)
-        console.log('EVENYTOUPDATE', eventToUpdate)
+
         if (!eventToUpdate || eventToUpdate.organizer.toHexString() !== userId) {
             throw new Error('Unauthorized or event not found')
         }
@@ -190,7 +182,7 @@ export async function getEventsByUser({ userId, limit = 6, page }: GetEventsByUs
 export const getPurchasedEventsByUser = async (userId: string) => {
 
     try {
-        console.log('IDDDDDDDDD', userId)
+
         const orders = await Order.find({ buyer: userId })
 
 

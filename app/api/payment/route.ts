@@ -38,6 +38,6 @@ export async function POST(req: Request) {
     }
     catch (error) {
 
-        return NextResponse.json({ error: 'Error creating Razorpay order' }, { status: 500 });
+        return NextResponse.json({ message: 'Error creating Razorpay order', error }, { status: 500 });
     }
 }

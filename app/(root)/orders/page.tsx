@@ -5,6 +5,7 @@ import { SearchParamProps } from '@/types'
 
 import { getOrderByEvent } from '@/lib/actions/order.actions'
 import { getEventById } from '@/lib/actions/event.actions'
+import { IOrder, IOrderItem } from '@/lib/database/models/order.model'
 
 
 const Orders = async ({ searchParams }: SearchParamProps) => {
@@ -52,7 +53,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
             ) : (
               <>
                 {orders &&
-                  orders?.data.map((row: any) => (
+                  orders?.data.map((row: IOrderItem) => (
                     <tr
                       key={row._id}
                       className="p-regular-14 lg:p-regular-16 border-b "

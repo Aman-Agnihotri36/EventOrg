@@ -1,7 +1,7 @@
 'use client'
 
 import { IEvent } from '@/lib/database/models/event.model'
-import React, { useEffect, useState } from 'react'
+
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation';
 import { toast } from "react-toastify";
@@ -13,8 +13,13 @@ import { CreateOrder } from '@/lib/actions/order.actions';
 
 declare global {
     interface Window {
-        Razorpay: any
+        Razorpay: (options: any) => {
+            open: () => void;
+            close: () => void;
+            on: (event: string, callback: () => void) => void;
+        };
     }
+
 }
 
 function CheckOut({ event, userId, EventExist }: { event: IEvent, userId: string, EventExist: number }) {
@@ -94,7 +99,7 @@ function CheckOut({ event, userId, EventExist }: { event: IEvent, userId: string
 
             }
 
-            const rzp1 = new window.Razorpay(options)
+            const rzp1 = window.Razorpay(options)
             rzp1.open();
         }
         catch (error) {

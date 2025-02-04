@@ -7,6 +7,7 @@ import Link from 'next/link';
 import CheckOut from './CheckOut';
 import { useEffect, useState } from 'react';
 import { getClerkUser } from '@/lib/actions/user.actions';
+import { IUser } from '@/lib/database/models/user.model';
 
 
 
@@ -14,7 +15,7 @@ import { getClerkUser } from '@/lib/actions/user.actions';
 function CheckoutButton({ event, EventExist }: { event: IEvent, EventExist: number }) {
 
     const { user } = useUser()
-    const [currentUser, setcurrentUser] = useState<any>()
+    const [currentUser, setcurrentUser] = useState<string>('')
 
     // Get user ID
     const userId = user?.id as string;

@@ -2,6 +2,7 @@ import Collection from '@/components/shared/Collection'
 import { Button } from '@/components/ui/button'
 import { getEventsByUser, getPurchasedEventsByUser } from '@/lib/actions/event.actions';
 import { getClerkUser } from '@/lib/actions/user.actions';
+import { IEvent } from '@/lib/database/models/event.model';
 import { auth } from '@clerk/nextjs/server';
 import Link from 'next/link'
 import React from 'react'
@@ -16,7 +17,7 @@ async function ProfilePage() {
 
     const organizedEvents = await getEventsByUser({ userId, page: 1 })
 
-    const PurchasedEvents: any = await getPurchasedEventsByUser(userId)
+    const PurchasedEvents: IEvent[] = await getPurchasedEventsByUser(userId) || []
 
 
 

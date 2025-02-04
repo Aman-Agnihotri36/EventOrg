@@ -47,7 +47,7 @@ function EventForm({ userId, type, event, eventId }: EventFormProps) {
 
 
     const [files, setFiles] = useState<File[]>([])
-    const [startDate, setStartDate] = useState(new Date());
+
 
     const { startUpload } = useUploadThing('imageUploader')
 

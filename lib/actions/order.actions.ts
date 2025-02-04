@@ -36,7 +36,7 @@ export const CreateOrder = async (detail: OrderDetails) => {
         await MongoDbConnect()
 
 
-        const order = await Order.create({
+        await Order.create({
             createdAt: new Date(detail.createdAt),
             razorpayId: detail.razorPayId,
             totalAmount: detail.money.toString(), // Convert to string if needed

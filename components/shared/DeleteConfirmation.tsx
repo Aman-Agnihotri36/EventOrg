@@ -1,5 +1,3 @@
-'use client'
-
 import { useTransition } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
@@ -21,9 +19,8 @@ import {
 import { deleteEvent } from '@/lib/actions/event.actions'
 
 export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
-    const pathname = usePathname()
-    let [isPending, startTransition] = useTransition()
-
+    const pathname = usePathname();
+    const [isPending, startTransition] = useTransition();  // Use `const` here
 
     return (
         <AlertDialog>
@@ -45,9 +42,9 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
                     <AlertDialogAction
                         onClick={() =>
                             startTransition(async () => {
-                                await deleteEvent({ eventId, path: pathname })
+                                await deleteEvent({ eventId, path: pathname });
 
-                                toast.success("Event Deleted Successfully")
+                                toast.success("Event Deleted Successfully");
                             })
                         }>
                         {isPending ? 'Deleting...' : 'Delete'}
@@ -55,5 +52,5 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
-    )
+    );
 }

@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 
-import Order, { IOrder, IOrderItem } from "../database/models/order.model";
+import Order, { IOrderItem } from "../database/models/order.model";
 import { handleError } from "../utils";
 import { MongoDbConnect } from "../database";
 

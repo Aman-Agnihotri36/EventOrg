@@ -2,10 +2,10 @@
 
 
 import { revalidatePath } from 'next/cache'
-import { CreateEventParams, DeleteEventParams, GetAllEventsParams, GetEventsByUserParams, GetRelatedEventsByCategoryParams, UpdateEventParams } from '../../types'
+import { DeleteEventParams, GetAllEventsParams, GetEventsByUserParams, GetRelatedEventsByCategoryParams } from '../../types'
 
 import Category from '../database/models/category.model'
-import Event, { IEvent } from '../database/models/event.model'
+import Event from '../database/models/event.model'
 import User from '../database/models/user.model'
 import { handleError } from '../utils'
 
@@ -18,7 +18,7 @@ const getCategoryByName = async (name: string) => {
     return Category.findOne({ name: { $regex: name, $options: 'i' } })
 }
 
-
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const populateEvent = async (query: any) => {
     return query
         .populate({ path: 'organizer', model: User, select: '_id firstName lastName email' })
@@ -26,7 +26,7 @@ const populateEvent = async (query: any) => {
 }
 
 
-
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 export const createEvent = async ({ event, userId }: { event: any, userId: string }) => {
     try {
         await MongoDbConnect()
@@ -106,6 +106,7 @@ export async function deleteEvent({ eventId, path }: DeleteEventParams) {
     }
 }
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 export async function updateEvent({ userId, event, path }: any) {
     try {
         await MongoDbConnect()

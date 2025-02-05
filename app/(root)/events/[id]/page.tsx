@@ -10,7 +10,7 @@ import React from 'react'
 
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-async function EventDetails({ params: { id }, searchParams }: SearchParamProps) {
+async function EventDetails({ params: { id }, searchParams }: any) {
 
 
 

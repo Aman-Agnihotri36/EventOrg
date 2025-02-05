@@ -20,9 +20,8 @@ export type RazorpayOptions = {
     currency: string;
     name: string;
     description: string;
-    // Add more properties as per Razorpay's API
-};
 
+};
 
 // ====== EVENT PARAMS
 export type CreateEventParams = {

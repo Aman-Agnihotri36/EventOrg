@@ -39,7 +39,7 @@ export const createEvent = async ({ event, userId }: { event: any, userId: strin
             throw new Error('Organizer not found')
         }
 
-        const newEvent = await Event.create({ ...event, category: event.category._id, organizer: organizer._id })
+        const newEvent = await Event.create({ ...event, category: event?.category?._id, organizer: organizer._id })
 
         return JSON.parse(JSON.stringify(newEvent))
     } catch (error) {

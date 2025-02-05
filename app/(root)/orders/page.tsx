@@ -1,7 +1,7 @@
 
 
 import { formatDateTime, formatPrice } from '@/lib/utils'
-import { SearchParamProps } from '@/types'
+
 
 import { getOrderByEvent } from '@/lib/actions/order.actions'
 import { getEventById } from '@/lib/actions/event.actions'

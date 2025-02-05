@@ -7,8 +7,8 @@ import { getOrderByEvent } from '@/lib/actions/order.actions'
 import { getEventById } from '@/lib/actions/event.actions'
 import { IOrderItem } from '@/lib/database/models/order.model'
 
-
-const Orders = async ({ searchParams }: SearchParamProps) => {
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+const Orders = async ({ searchParams }: any) => {
   const eventId = (searchParams?.eventId as string) || ''
 
 

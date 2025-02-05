@@ -3,13 +3,9 @@ import { getEventById } from "@/lib/actions/event.actions"
 import { auth } from "@clerk/nextjs/server"
 
 
-type UpdateEventProps = {
-    params: {
-        id: string
-    }
-}
 
-const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+const UpdateEvent = async ({ params: { id } }: any) => {
     const { sessionClaims } = await auth()
 
     const userId = sessionClaims?.sub as string;

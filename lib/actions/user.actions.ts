@@ -11,6 +11,7 @@ import { revalidatePath } from "next/cache"
 
 
 
+
 export const createUser = async (user: CreateUserParams) => {
 
     try {
@@ -80,6 +81,18 @@ export const getClerkUser = async (userId: string | null) => {
 
 
     return LoginUser?._id.toString();
+
+
+}
+
+export const getUser = async (userId: string | null) => {
+
+    await MongoDbConnect()
+
+    const user = await User.findOne({ _id: userId });
+
+
+    return JSON.parse(JSON.stringify(user))
 
 
 }

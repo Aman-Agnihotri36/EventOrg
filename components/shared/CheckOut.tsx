@@ -23,7 +23,7 @@ declare global {
 
 }
 
-function CheckOut({ event, userId, EventExist }: { event: IEvent, userId: string, EventExist: number }) {
+function CheckOut({ event, userId, userName, EventExist }: { event: IEvent, userId: string, userName: string, EventExist: number }) {
 
 
     const router = useRouter();
@@ -89,7 +89,7 @@ function CheckOut({ event, userId, EventExist }: { event: IEvent, userId: string
                 },
 
                 prefill: {
-                    name: userId,
+                    name: userName,
                     email: 'johndoe@example.com',
                     contact: '9999999999'
                 },

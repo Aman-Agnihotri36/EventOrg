@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import CheckOut from './CheckOut';
 import { useEffect, useState } from 'react';
-import { getClerkUser } from '@/lib/actions/user.actions';
+import { getClerkUser, getUser } from '@/lib/actions/user.actions';
 
 
 
@@ -16,6 +16,7 @@ function CheckoutButton({ event, EventExist }: { event: IEvent, EventExist: numb
 
     const { user } = useUser()
     const [currentUser, setcurrentUser] = useState<string>('')
+    const [userName, setuserName] = useState<string>('')
 
     // Get user ID
     const userId = user?.id as string;
@@ -24,12 +25,14 @@ function CheckoutButton({ event, EventExist }: { event: IEvent, EventExist: numb
 
     useEffect(() => {
         const fetchUser = async () => {
-            const User = await getClerkUser(userId);  // Await the Promise here
-            setcurrentUser(User);  // Set the resolved value
+            const User = await getClerkUser(userId);
+            setcurrentUser(User);
+            const user = await getUser(User)
+            setuserName(user._firstName)
         };
 
         if (userId) {
-            fetchUser();  // Call the async function
+            fetchUser();
         }
     }, [userId]);
 
@@ -49,7 +52,7 @@ function CheckoutButton({ event, EventExist }: { event: IEvent, EventExist: numb
                     </SignedOut>
 
                     <SignedIn>
-                        <CheckOut event={event} userId={currentUser} EventExist={EventExist} />
+                        <CheckOut event={event} userId={currentUser} userName={userName} EventExist={EventExist} />
                     </SignedIn>
                 </>
             )}

@@ -89,7 +89,7 @@ function CheckOut({ event, userId, EventExist }: { event: IEvent, userId: string
                 },
 
                 prefill: {
-                    name: event?.organizer?.firstName,
+                    name: userId,
                     email: 'johndoe@example.com',
                     contact: '9999999999'
                 },
